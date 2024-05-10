@@ -30,10 +30,10 @@ jobs:
         cd `cat /tmp/WLEDtemp/wledfoldername`
         npm install
         echo '[env:custom_build]' >>platformio.ini
-        echo 'extends = env:esp32_4MB_XL' >>platformio.ini
-        echo 'build_flags = ${env:esp32_4MB_XL.build_flags} -D WLED_DISABLE_ESPNOW -D WLED_ENABLE_MQTT -D WLED_ENABLE_PIXART -D DEFAULT_LED_COUNT=512 -D USERMOD_DALLASTEMPERATURE -D USERMOD_FOUR_LINE_DISPLAY -D USERMOD_WORDCLOCK -D USERMOD_ANALOG_CLOCK -D USERMOD_SENSORSTOMQTT' >>platformio.ini
+        echo 'extends = env:esp32_4MB_S' >>platformio.ini
+        echo 'build_flags = ${env:esp32_4MB_S.build_flags} -D WLED_ENABLE_MQTT -D WLED_ENABLE_PIXART -D USERMOD_DALLASTEMPERATURE -D USERMOD_FOUR_LINE_DISPLAY -D USERMOD_WORDCLOCK -D USERMOD_ANALOG_CLOCK -D USERMOD_SENSORSTOMQTT' >>platformio.ini
         echo 'lib_deps = ' >>platformio.ini
-        echo '  ${env:esp32_4MB_XL.lib_deps}' >>platformio.ini
+        echo '  ${env:esp32_4MB_S.lib_deps}' >>platformio.ini
         echo '  OneWire@~2.3.7' >>platformio.ini
         echo '  olikraus/U8g2 @ ^2.28.8' >>platformio.ini
         echo '  adafruit/Adafruit BMP280 Library @ 2.1.0' >>platformio.ini
