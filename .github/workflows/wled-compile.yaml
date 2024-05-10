@@ -24,18 +24,14 @@ jobs:
       run: |
         rm -rf /tmp/WLEDtemp/* || true
         mkdir -p /tmp/WLEDtemp
-        wget https://github.com/moonmodules/WLED/archive/refs/heads/mdev.zip -O /tmp/WLEDtemp/mm.zip
+        wget https://github.com/Aircoookie/WLED/archive/refs/heads/main.zip -O /tmp/WLEDtemp/mm.zip
         unzip /tmp/WLEDtemp/mm.zip -d /tmp/WLEDtemp
         find /tmp/WLEDtemp -maxdepth 1 -mindepth 1 -name "*" -type d >> /tmp/WLEDtemp/wledfoldername
         cd `cat /tmp/WLEDtemp/wledfoldername`
         npm install
         echo '[env:custom_build]' >>platformio.ini
-        echo 'extends = env:esp32_16MB_V4_S' >>platformio.ini
-        echo 'build_flags = ${env:esp32_16MB_V4_S.build_flags} -D WLED_ENABLE_MQTT -D WLED_ENABLE_PIXART -D USERMOD_DALLASTEMPERATURE -D USERMOD_FOUR_LINE_DISPLAY -D USERMOD_WORDCLOCK -D USERMOD_ANALOG_CLOCK' >>platformio.ini
-        echo 'lib_deps = ' >>platformio.ini
-        echo '  ${env:esp32_16MB_V4_S.lib_deps}' >>platformio.ini
-        echo '  OneWire@~2.3.7' >>platformio.ini
-        echo '  olikraus/U8g2 @ ^2.28.8' >>platformio.ini
+        echo 'extends = env:esp32dev' >>platformio.ini
+        echo 'build_flags = ${env:esp32dev.build_flags} -D WLED_DISABLE_BROWNOUT_DET' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
     - name: Copy Files
